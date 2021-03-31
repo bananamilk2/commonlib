@@ -33,6 +33,7 @@ public class ALog {
     private String appName = DEFAULT_APP_NAME;
     private Context context;
     private static String TAG = DEFAULT_TAG;
+    private String childTag;
 
     private ALog() {
     }
@@ -47,6 +48,15 @@ public class ALog {
         }
         return instance;
     }
+
+    public static ALog getLogger() {
+        return new ALog();
+    }
+
+    public void setChildTag(String tag) {
+        this.childTag = tag;
+    }
+
 
     public ALog init(final Context appContext) {
         return this.init(appContext, null);
@@ -143,6 +153,8 @@ public class ALog {
             StringBuilder builder = new StringBuilder("[");
             if (enableThreadName)
                 builder.append(Thread.currentThread().getName()).append(": ");
+            if (TextUtils.isEmpty(childTag))
+                builder.append(childTag).append(": ");
             if (enableFileName)
                 builder.append(st.getFileName()).append(": ");
             if (enableLineNumber)

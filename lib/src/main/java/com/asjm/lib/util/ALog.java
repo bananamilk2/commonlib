@@ -153,7 +153,7 @@ public class ALog {
             StringBuilder builder = new StringBuilder("[");
             if (enableThreadName)
                 builder.append(Thread.currentThread().getName()).append(": ");
-            if (TextUtils.isEmpty(childTag))
+            if (!TextUtils.isEmpty(childTag))
                 builder.append(childTag).append(": ");
             if (enableFileName)
                 builder.append(st.getFileName()).append(": ");
